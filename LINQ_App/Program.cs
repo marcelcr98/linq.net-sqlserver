@@ -19,12 +19,16 @@ namespace LINQ_App
             //Grouping2();
             //Joining();
             //introLambda();
-            datasourceLambda();
+            //datasourceLambda();
             //FilteringLambda();
             //OrderingLambda();
             //GroupingLambda();
             //Grouping2Lmabda();
             //JoiningLambda();
+            Clientes2Pedidos();
+            Pedidos5Years();
+            PedidosPrecio();
+            Proveedores2Productos();
             Console.Read();
 
         }
@@ -38,7 +42,6 @@ namespace LINQ_App
             foreach (var item in pares)
             {
                 Console.WriteLine("{0,1}", item);
-
             }
 
         
@@ -160,7 +163,7 @@ namespace LINQ_App
 
 
 
-        //FilteringLambda##############3
+        //FilteringLambda
 
         static void FilteringLambda()
         {
@@ -175,7 +178,7 @@ namespace LINQ_App
 
 
 
-        //OrderingLambda##################3333
+        //OrderingLambda
         static void OrderingLambda()
         {
             var queryLondonCustomers3 = context.clientes.Where(c => c.Ciudad == "Londres").OrderByDescending(j => j.NombreCompañia).ToList();
@@ -231,5 +234,64 @@ namespace LINQ_App
                 Console.WriteLine($"{ item.NombreCompañia} y destinatario : {item.PaisDestinatario}");
             }
         }
+
+
+
+
+
+
+        //EJERCICIOS EXTRAS CON LAMBDA
+
+        //Todos los pedidos de los ultimos 5 años
+        static void Pedidos5Years()
+        {
+
+            var queryPedido = context.Pedidos.Where(c => c.FechaPedido > "1994-01-01").OrderByDescending(j => j.idPedido).ToList();
+
+            foreach (var item in queryPedido)
+            {
+                Console.WriteLine(item.idPedido);
+            }
+
+
+        }
+        //Clientes con mas de 2 pedidos
+
+        static void Clientes2Pedidos()
+        {
+            var custQuery = from cust in context.Pedidos
+                            group cust by cust.IdCliente into custGroup
+                            where custGroup.Count() > 2
+                            orderby custGroup.Key
+                            select custGroup;
+
+            foreach (var item in custQuery)
+            {
+                Console.WriteLine(item.Key);
+            }
+        }
+
+        //Todos los pedidos precio*cantidad > 200
+        static void PedidosPrecio()
+        {
+            var queryPedidos = context.detallesdepedidos.Where(c => c.preciounidad * c.cantidad > 200).OrderByDescending(j => j.idpedido).ToList();
+
+            foreach (var item in queryPedidos)
+            {
+                Console.WriteLine(item.idpedido);
+            }
+        }
+
+        //Proveedores que tenga mas de 2 productos
+        static void Proveedores2Productos()
+        {
+            var queryPedidos = context.productos.Where(c => c.unidadesEnExistencia > 2).OrderByDescending(j => j.idProveedor).ToList();
+
+            foreach (var item in queryPedidos)
+            {
+                Console.WriteLine(item.idProveedor);
+            }
+        }
+
     }
 }

@@ -36,6 +36,9 @@ namespace LINQ_App
     partial void Insertclientes(clientes instance);
     partial void Updateclientes(clientes instance);
     partial void Deleteclientes(clientes instance);
+    partial void Insertproductos(productos instance);
+    partial void Updateproductos(productos instance);
+    partial void Deleteproductos(productos instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -81,6 +84,22 @@ namespace LINQ_App
 			get
 			{
 				return this.GetTable<clientes>();
+			}
+		}
+		
+		public System.Data.Linq.Table<detallesdepedidos> detallesdepedidos
+		{
+			get
+			{
+				return this.GetTable<detallesdepedidos>();
+			}
+		}
+		
+		public System.Data.Linq.Table<productos> productos
+		{
+			get
+			{
+				return this.GetTable<productos>();
 			}
 		}
 	}
@@ -827,6 +846,407 @@ namespace LINQ_App
 		{
 			this.SendPropertyChanging();
 			entity.clientes = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.detallesdepedidos")]
+	public partial class detallesdepedidos
+	{
+		
+		private System.Nullable<int> _idpedido;
+		
+		private System.Nullable<int> _idproducto;
+		
+		private decimal _preciounidad;
+		
+		private int _cantidad;
+		
+		private decimal _descuento;
+		
+		public detallesdepedidos()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idpedido", DbType="Int")]
+		public System.Nullable<int> idpedido
+		{
+			get
+			{
+				return this._idpedido;
+			}
+			set
+			{
+				if ((this._idpedido != value))
+				{
+					this._idpedido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idproducto", DbType="Int")]
+		public System.Nullable<int> idproducto
+		{
+			get
+			{
+				return this._idproducto;
+			}
+			set
+			{
+				if ((this._idproducto != value))
+				{
+					this._idproducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_preciounidad", DbType="Decimal(18,0) NOT NULL")]
+		public decimal preciounidad
+		{
+			get
+			{
+				return this._preciounidad;
+			}
+			set
+			{
+				if ((this._preciounidad != value))
+				{
+					this._preciounidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantidad", DbType="Int NOT NULL")]
+		public int cantidad
+		{
+			get
+			{
+				return this._cantidad;
+			}
+			set
+			{
+				if ((this._cantidad != value))
+				{
+					this._cantidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descuento", DbType="Decimal(18,0) NOT NULL")]
+		public decimal descuento
+		{
+			get
+			{
+				return this._descuento;
+			}
+			set
+			{
+				if ((this._descuento != value))
+				{
+					this._descuento = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.productos")]
+	public partial class productos : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idproducto;
+		
+		private string _nombreProducto;
+		
+		private System.Nullable<int> _idProveedor;
+		
+		private System.Nullable<int> _idCategoria;
+		
+		private string _cantidadPorUnidad;
+		
+		private System.Nullable<decimal> _precioUnidad;
+		
+		private System.Nullable<short> _unidadesEnExistencia;
+		
+		private System.Nullable<short> _unidadesEnPedido;
+		
+		private System.Nullable<short> _nivelNuevoPedido;
+		
+		private System.Nullable<short> _suspendido;
+		
+		private string _categoriaProducto;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidproductoChanging(int value);
+    partial void OnidproductoChanged();
+    partial void OnnombreProductoChanging(string value);
+    partial void OnnombreProductoChanged();
+    partial void OnidProveedorChanging(System.Nullable<int> value);
+    partial void OnidProveedorChanged();
+    partial void OnidCategoriaChanging(System.Nullable<int> value);
+    partial void OnidCategoriaChanged();
+    partial void OncantidadPorUnidadChanging(string value);
+    partial void OncantidadPorUnidadChanged();
+    partial void OnprecioUnidadChanging(System.Nullable<decimal> value);
+    partial void OnprecioUnidadChanged();
+    partial void OnunidadesEnExistenciaChanging(System.Nullable<short> value);
+    partial void OnunidadesEnExistenciaChanged();
+    partial void OnunidadesEnPedidoChanging(System.Nullable<short> value);
+    partial void OnunidadesEnPedidoChanged();
+    partial void OnnivelNuevoPedidoChanging(System.Nullable<short> value);
+    partial void OnnivelNuevoPedidoChanged();
+    partial void OnsuspendidoChanging(System.Nullable<short> value);
+    partial void OnsuspendidoChanged();
+    partial void OncategoriaProductoChanging(string value);
+    partial void OncategoriaProductoChanged();
+    #endregion
+		
+		public productos()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idproducto", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idproducto
+		{
+			get
+			{
+				return this._idproducto;
+			}
+			set
+			{
+				if ((this._idproducto != value))
+				{
+					this.OnidproductoChanging(value);
+					this.SendPropertyChanging();
+					this._idproducto = value;
+					this.SendPropertyChanged("idproducto");
+					this.OnidproductoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreProducto", DbType="VarChar(40)")]
+		public string nombreProducto
+		{
+			get
+			{
+				return this._nombreProducto;
+			}
+			set
+			{
+				if ((this._nombreProducto != value))
+				{
+					this.OnnombreProductoChanging(value);
+					this.SendPropertyChanging();
+					this._nombreProducto = value;
+					this.SendPropertyChanged("nombreProducto");
+					this.OnnombreProductoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProveedor", DbType="Int")]
+		public System.Nullable<int> idProveedor
+		{
+			get
+			{
+				return this._idProveedor;
+			}
+			set
+			{
+				if ((this._idProveedor != value))
+				{
+					this.OnidProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._idProveedor = value;
+					this.SendPropertyChanged("idProveedor");
+					this.OnidProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCategoria", DbType="Int")]
+		public System.Nullable<int> idCategoria
+		{
+			get
+			{
+				return this._idCategoria;
+			}
+			set
+			{
+				if ((this._idCategoria != value))
+				{
+					this.OnidCategoriaChanging(value);
+					this.SendPropertyChanging();
+					this._idCategoria = value;
+					this.SendPropertyChanged("idCategoria");
+					this.OnidCategoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantidadPorUnidad", DbType="VarChar(20)")]
+		public string cantidadPorUnidad
+		{
+			get
+			{
+				return this._cantidadPorUnidad;
+			}
+			set
+			{
+				if ((this._cantidadPorUnidad != value))
+				{
+					this.OncantidadPorUnidadChanging(value);
+					this.SendPropertyChanging();
+					this._cantidadPorUnidad = value;
+					this.SendPropertyChanged("cantidadPorUnidad");
+					this.OncantidadPorUnidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_precioUnidad", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> precioUnidad
+		{
+			get
+			{
+				return this._precioUnidad;
+			}
+			set
+			{
+				if ((this._precioUnidad != value))
+				{
+					this.OnprecioUnidadChanging(value);
+					this.SendPropertyChanging();
+					this._precioUnidad = value;
+					this.SendPropertyChanged("precioUnidad");
+					this.OnprecioUnidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unidadesEnExistencia", DbType="SmallInt")]
+		public System.Nullable<short> unidadesEnExistencia
+		{
+			get
+			{
+				return this._unidadesEnExistencia;
+			}
+			set
+			{
+				if ((this._unidadesEnExistencia != value))
+				{
+					this.OnunidadesEnExistenciaChanging(value);
+					this.SendPropertyChanging();
+					this._unidadesEnExistencia = value;
+					this.SendPropertyChanged("unidadesEnExistencia");
+					this.OnunidadesEnExistenciaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unidadesEnPedido", DbType="SmallInt")]
+		public System.Nullable<short> unidadesEnPedido
+		{
+			get
+			{
+				return this._unidadesEnPedido;
+			}
+			set
+			{
+				if ((this._unidadesEnPedido != value))
+				{
+					this.OnunidadesEnPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._unidadesEnPedido = value;
+					this.SendPropertyChanged("unidadesEnPedido");
+					this.OnunidadesEnPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nivelNuevoPedido", DbType="SmallInt")]
+		public System.Nullable<short> nivelNuevoPedido
+		{
+			get
+			{
+				return this._nivelNuevoPedido;
+			}
+			set
+			{
+				if ((this._nivelNuevoPedido != value))
+				{
+					this.OnnivelNuevoPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._nivelNuevoPedido = value;
+					this.SendPropertyChanged("nivelNuevoPedido");
+					this.OnnivelNuevoPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_suspendido", DbType="SmallInt")]
+		public System.Nullable<short> suspendido
+		{
+			get
+			{
+				return this._suspendido;
+			}
+			set
+			{
+				if ((this._suspendido != value))
+				{
+					this.OnsuspendidoChanging(value);
+					this.SendPropertyChanging();
+					this._suspendido = value;
+					this.SendPropertyChanged("suspendido");
+					this.OnsuspendidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_categoriaProducto", DbType="VarChar(20)")]
+		public string categoriaProducto
+		{
+			get
+			{
+				return this._categoriaProducto;
+			}
+			set
+			{
+				if ((this._categoriaProducto != value))
+				{
+					this.OncategoriaProductoChanging(value);
+					this.SendPropertyChanging();
+					this._categoriaProducto = value;
+					this.SendPropertyChanged("categoriaProducto");
+					this.OncategoriaProductoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

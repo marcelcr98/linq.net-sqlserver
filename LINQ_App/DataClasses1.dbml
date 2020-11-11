@@ -16,6 +16,7 @@
       <Column Name="RegionDestinatario" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
       <Column Name="CodPostalDestinatario" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
       <Column Name="PaisDestinatario" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Association Name="Pedidos_detallesdepedidos" Member="detallesdepedidos" ThisKey="IdPedido" OtherKey="idpedido" Type="detallesdepedidos" />
       <Association Name="clientes_Pedidos" Member="clientes" ThisKey="IdCliente" OtherKey="idCliente" Type="clientes" IsForeignKey="true" />
     </Type>
   </Table>
@@ -33,6 +34,33 @@
       <Column Name="Telefono" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="Fax" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Association Name="clientes_Pedidos" Member="Pedidos" ThisKey="idCliente" OtherKey="IdCliente" Type="Pedidos" />
+    </Type>
+  </Table>
+  <Table Name="dbo.detallesdepedidos" Member="detallesdepedidos">
+    <Type Name="detallesdepedidos">
+      <Column Name="idpedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idproducto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="preciounidad" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="descuento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Association Name="Pedidos_detallesdepedidos" Member="Pedidos" ThisKey="idpedido" OtherKey="IdPedido" Type="Pedidos" IsForeignKey="true" />
+      <Association Name="productos_detallesdepedidos" Member="productos" ThisKey="idproducto" OtherKey="idproducto" Type="productos" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.productos" Member="productos">
+    <Type Name="productos">
+      <Column Name="idproducto" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombreProducto" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="idProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idCategoria" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cantidadPorUnidad" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="precioUnidad" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="unidadesEnExistencia" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="unidadesEnPedido" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="nivelNuevoPedido" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="suspendido" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="categoriaProducto" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="productos_detallesdepedidos" Member="detallesdepedidos" ThisKey="idproducto" OtherKey="idproducto" Type="detallesdepedidos" />
     </Type>
   </Table>
 </Database>
